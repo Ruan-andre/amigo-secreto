@@ -1,7 +1,7 @@
 {
-  "url_cover": "",
+  "url_cover": "https://github.com/Ruan-andre/amigo-secreto/blob/main/portfolio-content/cover.png",
   "url_video": "https://streamable.com/e/9i9661?",
   "url_linkedin": "",
-  "url_live_project": "",
+  "url_live_project": "http://ar-amigo-secreto.vercel.app/",
   "technologies": ["HTML", "CSS", "JavaScript"]
 }
