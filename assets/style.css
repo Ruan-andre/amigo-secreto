@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 body {
   background: #000;
   min-height: 100vh;
@@ -5,6 +9,7 @@ body {
 }
 
 .background__detail {
+  display: none;
   background-color: #00f4bf;
   height: calc(100% - 389px);
   left: 0;
@@ -32,23 +37,23 @@ body {
   padding: 16px 24px;
   text-align: center;
   width: 208px;
+  transition: 0.3s;
 }
 
-.content {
-  background-color: #000;
-  border: 1px solid #1875e8;
-  filter: drop-shadow(0px 0px 30px #1875e8);
-  height: 871px;
-  left: 50%;
-  margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 75%;
-  z-index: 1;
+.button:hover {
+  transform: scale(1.1);
+}
+
+.content__main {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 60px;
+  padding: 60px;
 }
 
 .content__corner-rectangle {
+  display: none;
   background-color: #00f4bf;
   bottom: -15px;
   clip-path: polygon(0% 100%, 0% 50%, 4% 0%, 100% 0%, 100% 50%, 96% 100%);
@@ -59,13 +64,7 @@ body {
   z-index: 3;
 }
 
-.content__main {
-  display: flex;
-  flex-direction: column;
-  gap: 80px;
-  justify-content: start;
-  padding: 100px;
-}
+
 
 .friends__container {
   align-items: center;
@@ -78,11 +77,12 @@ body {
   justify-content: center;
   line-height: 160%;
   margin-top: 1rem;
-  padding: 24px;
-  width: 453px;
+  padding: 18px;
+  max-width: 100%;
+  width: 450px;
 }
 
-.friends__container > p {
+.friends__container>p {
   color: #fff;
   font-size: 21px;
   font-weight: 400;
@@ -106,6 +106,7 @@ body {
 .form__buttons {
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
   gap: 32px;
 }
 
@@ -118,11 +119,15 @@ body {
   display: flex;
   font-size: 21px;
   font-weight: 400;
-  height: 56px;
+  max-height: 56px;
   margin-bottom: 32px;
   outline: none;
   padding: 8px 16px;
-  width: 517px;
+  max-width: 452px;
+}
+
+.form__input:focus {
+  border-color: green;
 }
 
 .form__input::placeholder {
@@ -145,10 +150,10 @@ body {
   font-weight: 400;
   line-height: 110%;
   text-align: center;
-  text-decoration-line: underline;
 }
 
 .page__image {
+  display: none;
   position: absolute;
   right: 0;
   top: 76px;
@@ -164,7 +169,7 @@ body {
   height: 199px;
   line-height: 160%;
   margin-top: 1rem;
-  
+
 }
 
 .prizeDraw__title {
@@ -182,9 +187,11 @@ body {
 .section--results {
   align-items: start;
   display: flex;
+  flex-wrap: wrap;
   font-family: Inter;
   font-style: normal;
   gap: 48px;
+  min-height: 20rem;
 }
 
 .section__title {
@@ -197,7 +204,7 @@ body {
   margin: 0 0 80px 0;
 }
 
-.section__title > span {
+.section__title>span {
   color: #1875e8;
 }
 
@@ -206,8 +213,76 @@ body {
   color: #1875e8;
 }
 
-.disabled{
+.disabled {
   cursor: not-allowed;
   background-color: #838383;
   color: #454545;
+}
+
+
+@media(min-width:1450px) {
+  .page__image {
+    display: block;
+  }
+
+  .background__detail {
+    display: block
+  }
+
+  .content {
+    background-color: #000;
+    border: 1px solid #1875e8;
+    filter: drop-shadow(0px 0px 30px #1875e8);
+    height: 871px;
+    left: 50%;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    z-index: 1;
+  }
+
+  .content__main {
+    gap: 80px;
+    padding: 100px;
+  }
+
+  .content__corner-rectangle {
+    display: block;
+  }
+
+  .form__input{
+    height: 50px;
+  }
+}
+
+@media(max-width: 768px) {
+  .section__title {
+    font-size: 32px;
+  }
+
+  .form__label {
+    font-size: 18px;
+  }
+
+  .form__input {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .button {
+    font-size: 18px;
+    width: 100%;
+  }
+
+  .form__buttons {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .friends__container{
+    max-width: 100%;
+    width: 100%;
+  }
 }
