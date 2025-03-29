@@ -1,65 +1,68 @@
-document.querySelector('form').addEventListener('submit', function (event) {
-    event.preventDefault();
-})
+document.querySelector('form').addEventListener('submit', event => event.preventDefault())
+document.getElementById("friendName").addEventListener('keydown', e => {
+    if (e.key == "Enter") {
+        addName();
+    }
+});
+document.getElementById("addName").addEventListener("click", addName);
+document.getElementById("draw").addEventListener("click", draw);
+document.getElementById("restart").addEventListener("click", restart);
 
-let nomes = [];
+let names = [];
 
-function adicionar() {
-    let inputNome = getInputNome();
-    let listaAmigos = getListaAmigos();
-    if (inputNome.value === '') {
+function addName() {
+    let inputName = getInputName();
+    let friendList = getFriendsListElement();
+    if (inputName.value === '') {
         alert('Digite um nome!');
         return;
     }
-    if (!nomes.find(x => x.toLowerCase() === inputNome.value.toLowerCase())) {
-        listaAmigos.innerHTML += `<br /><span>${inputNome.value}</span>`
-        nomes.push(inputNome.value);
-        ativarBotaoSortear();
-    } else {
-        alert(`Nome ${inputNome.value} já inserido!`)
+    if (!names.find(x => x.toLowerCase() === inputName.value.toLowerCase())) {
+        friendList.innerHTML += `<br /><span>${inputName.value}</span>`
+        names.push(inputName.value);
+        toggleBtnDraw();
     }
-
-    inputNome.value = "";
+    else
+        alert(`Nome ${inputName.value} já inserido!`)
+    inputName.value = "";
 }
 
-function sortear() {
-    let max = nomes.length;
-    let listaSorteio = getListaSorteio();
-    const arrayEmbaralhado = embaralharArray(nomes);
-    listaSorteio.innerHTML = "";
+function draw() {
+    let max = names.length;
+    let drawList = getDrawListElement();
+    const shuffledArray = shuffleArray(names);
+    drawList.innerHTML = "";
     for (let i = 0; i < max; i++) {
         if (i < max - 1) {
-            listaSorteio.innerHTML += `${arrayEmbaralhado[i]} --> ${arrayEmbaralhado[i + 1]} <br/>`;
+            drawList.innerHTML += `${shuffledArray[i]} --> ${shuffledArray[i + 1]} <br/>`;
         } else {
-            listaSorteio.innerHTML += `${arrayEmbaralhado[i]} --> ${arrayEmbaralhado[0]}`;
+            drawList.innerHTML += `${shuffledArray[i]} --> ${shuffledArray[0]}`;
         }
     }
 }
 
-function reiniciar() {
-    let element1 = getInputNome();
-    let element2 = getListaAmigos();
-    let element3 = getListaSorteio();
+function restart() {
+    let element1 = getInputName();
+    let element2 = getFriendsListElement();
+    let element3 = getDrawListElement();
     element1.innerHTML = "";
     element2.innerHTML = "";
     element3.innerHTML = "";
-    nomes = [];
-    ativarBotaoSortear();
+    names = [];
+    toggleBtnDraw();
 }
 
-function getListaAmigos() {
-    return document.getElementById('lista-amigos');
+function getFriendsListElement() {
+    return document.getElementById('friendsList');
 }
 
-function getInputNome() {
-    return document.getElementById("nome-amigo");
+function getInputName() {
+    return document.getElementById("friendName");
 }
 
-
-function ativarBotaoSortear() {
-
-    let btn = document.getElementById("btnSortear");
-    if (nomes.length < 3) {
+function toggleBtnDraw() {
+    let btn = document.getElementById("draw");
+    if (names.length < 3) {
         btn.setAttribute("disabled", "true");
         btn.classList.add('disabled');
     } else {
@@ -67,27 +70,15 @@ function ativarBotaoSortear() {
         btn.classList.remove('disabled');
     }
 }
-
 function getRandomNum(max) {
     return parseInt(Math.random() * max);
 }
-
-function getListaSorteio() {
-    return document.getElementById("lista-sorteio");
+function getDrawListElement() {
+    return document.getElementById("drawList");
 }
-
-document.addEventListener('keydown', (e) => {
-    if (e.key == "Enter") {
-        adicionar();
-    }
-});
-
-function embaralharArray(array) {
+function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
-        // Escolha um índice aleatório entre 0 e i
         const j = Math.floor(Math.random() * (i + 1));
-
-        // Troca os elementos na posição i e j
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
